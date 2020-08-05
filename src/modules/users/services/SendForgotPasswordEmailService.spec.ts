@@ -4,12 +4,11 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
 import SendForgotPasswordEmail from './SendForgotPasswordEmailService';
-import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUserTokensRepository: FakeUserTokensRepository;
 let fakeMailProvider: FakeMailProvider;
-let sendForgotPasswordEmail: SendForgotPasswordEmailService;
+let sendForgotPasswordEmail: SendForgotPasswordEmail;
 
 describe('SendForgotPasswordEmail', () => {
   beforeEach(() => {
