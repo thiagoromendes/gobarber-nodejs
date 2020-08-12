@@ -6,6 +6,7 @@ import Appointment from '../infra/typeorm/entities/Appointment';
 
 interface IRequest {
   provider_id: string;
+  user_id: string;
   date: Date;
 }
 
@@ -18,6 +19,7 @@ class CreateAppointmentService {
 
   public async execute({
     provider_id,
+    user_id,
     date,
   }: IRequest): Promise<Appointment | undefined> {
     const appointmentDate = startOfHour(date);
@@ -30,12 +32,11 @@ class CreateAppointmentService {
       throw new AppError('This appointment is already booke');
     }
 
-    const appointment = this.appointmentsRepository.create({
+    const appointment = await this.appointmentsRepository.create({
       provider_id,
+      user_id,
       date: appointmentDate,
     });
-
-    // await this.appointmentsRepository.save(appointment);
 
     return appointment;
   }
