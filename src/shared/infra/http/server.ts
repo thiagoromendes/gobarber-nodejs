@@ -8,12 +8,14 @@ import 'express-async-errors';
 
 import AppError from '@shared/errors/AppError';
 import uploadConfig from '@config/upload';
+import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes/index';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
 
 const app = express();
+app.use(rateLimiter);
 app.use(cors());
 app.use(json());
 app.use('/files', express.static(uploadConfig.uploadFolder));
